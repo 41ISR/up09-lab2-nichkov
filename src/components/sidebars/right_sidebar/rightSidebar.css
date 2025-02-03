@@ -1,0 +1,61 @@
+.right_sidebar{
+    width:75%;
+    float:left;
+}
+.messages{
+    height:80vh;
+}
+.sidebar_text{
+    width:90%;
+    padding:20px;
+    border-radius:20px;
+    background-color: #141414;
+    color:white;
+    font-size:20px;
+    margin:2%;
+    margin-bottom:20px;
+    overflow-wrap: break-word;
+}
+.me{
+    text-align:right;
+    background-color: #333333;
+
+}
+.sidebar_text p{
+    width:100%;
+}
+.sidebar_input{
+    width:100%;
+}
+.sidebar_inputs{
+    width:100%;
+    float:left;
+    border-top:4px solid #3d3d3d;
+}
+.send_message_input{
+    all:unset;
+    width:80%;
+    height:9vh;
+    float:left;
+    padding-left:20px;
+    box-sizing: border-box;
+    color:white;
+    font-size:20px;
+    line-height:9vh;
+}
+.send_message_submit{
+    all:unset;
+    float:left;
+    border-left:4px solid #3d3d3d;
+    height:8.5vh;
+    width:20%;
+    box-sizing: border-box;
+    background-color: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s;
+    border-bottom-right-radius:13px;
+}
+.send_message_submit:hover{
+    background-color:#3d3d3d;
+}
