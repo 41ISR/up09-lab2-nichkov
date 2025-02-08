@@ -59,3 +59,7 @@
 .send_message_submit:hover{
     background-color:#3d3d3d;
 }
+.send_message_submit img{
+    width:40px;
+    height:40px;
+}
