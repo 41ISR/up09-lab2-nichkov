@@ -15,11 +15,13 @@
     margin:2%;
     margin-bottom:20px;
     overflow-wrap: break-word;
+    box-sizing: border-box;
+    float:left;
 }
 .me{
     text-align:right;
     background-color: #333333;
-
+    float:right;
 }
 .sidebar_text p{
     width:100%;
@@ -35,7 +37,7 @@
 .send_message_input{
     all:unset;
     width:80%;
-    height:9vh;
+    height:10vh;
     float:left;
     padding-left:20px;
     box-sizing: border-box;
@@ -47,7 +49,7 @@
     all:unset;
     float:left;
     border-left:4px solid #3d3d3d;
-    height:8.5vh;
+    height:10vh;
     width:20%;
     box-sizing: border-box;
     background-color: none;

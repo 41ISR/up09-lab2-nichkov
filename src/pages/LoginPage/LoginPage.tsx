@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import {UsersStore} from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import { URLs } from "../../router/URLs";
+import axios from "axios";
+import Api from "../../api/api";
+
 const Login =()=>{
     const [idValue, setIdValue]= useState("")
     const {setUserId} = UsersStore()
@@ -11,8 +14,15 @@ const Login =()=>{
 
     const handleClick = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        const res = idValue.trim();
-        setUserId(res);
+        // const res = idValue.trim();
+        // setUserId(res);
+        try {
+            const res = await Api.login(idValue.trim());
+            setUserId(res.id);
+            navigate(URLs.CHAT);
+          } catch (error) {
+            console.error("Login error:", error);
+          }
     }
 
     useEffect(()=>{
