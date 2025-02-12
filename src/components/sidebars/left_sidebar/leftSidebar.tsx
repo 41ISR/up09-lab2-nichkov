@@ -3,26 +3,38 @@ import "./leftSidebar.css";
 import SidebarChat from "./sidebarChat";
 import io from "socket.io-client"
 import { UsersStore } from "../../../store/store";
+
 const socket = io("https://api.ktkv.dev", {
     withCredentials: true,
     transports: ["websocket", "polling"],
 })
+
 const LeftSidebar = () => {
     const [isChatsOpen, setChatsOpen] = useState(false);
     const [isContactsOpen, setContactsOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<"chats" | "users">("chats")
     const [activeChats, setActiveChats] = useState<string[]>([])
-    const {setUserId} = UsersStore()
+    const {setUsers, users} = UsersStore()
     //const { messages } = useMessageStore()
+
     useEffect(() => {
+        console.log("Init socket");
+        
         socket.on("users", (newUsers) => {
-            setUserId(newUsers)
+            
+            setUsers(newUsers)
         })
 
         return () => {
             socket.off("users")
         }
-    }, [setUserId])
+    }, [])
+
+useEffect(() => {
+    console.log(users);
+
+}, [users])
+
     const toggleChats = () => {
         setChatsOpen(!isChatsOpen);
     };
@@ -36,27 +48,20 @@ const LeftSidebar = () => {
             <div className="left_sidebar_chats">
                 <p onClick={toggleChats}>Чаты</p>
                 <div className={`chat_list ${isChatsOpen ? 'open' : ''}`}>
-                    <SidebarChat />
-                    <SidebarChat />
-                    <SidebarChat />
-                    <SidebarChat />
+
                 </div>
             </div>
             <div className="left_sidebar_contacts">
                 <p onClick={toggleContacts}>Контакты</p>
                 <div className={`contact_list ${isContactsOpen ? 'open' : ''}`}>
-                    {setUserId.map((user) => (
-                        <li
-                            key={user.id}
+                    {users.map((user) => (
+                        <SidebarChat
+                            key={user.socketId} 
+                            user={user.id}
                             //onClick={() => onSelectUser(user.id)}
-                        >
-                            {user.id}
-                        </li>
+                        />
                     ))}
-                    <SidebarChat />
-                    <SidebarChat />
-                    <SidebarChat />
-                    <SidebarChat />
+
                 </div>
             </div>
         </div>

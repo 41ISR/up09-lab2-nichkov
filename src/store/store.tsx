@@ -1,63 +1,72 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import io from "socket.io-client";
-import axios from "axios";
-const socket = io("https://api.ktkv.dev", {
-  withCredentials: true,
-  transports: ["websocket", "polling"]
-});
 
-interface IAppUser{
-  id:string;
-  socketId?:string;
+interface IAppUser {
+  id: string;
+  socketId?: string;
 }
 interface User {
-    user: string | undefined;
-    users: IAppUser[];
-    setUserId: (id: string) => void;
-    setUsers: (users: IAppUser[]) => void;
-  }
+  user: string | undefined;
+  users: IAppUser[];
+  setUserId: (id: string) => void;
+  setUsers: (users: IAppUser[]) => void;
+}
+export interface Message {
+  from: string;
+  to: string;
+  message: string;
+  timestamp: string;
+}
 
+interface MessageStoreState {
+  messages: Message[];
+  addMessage: (message: Message) => void;
+  setMessages: (messages: Message[]) => void;
+}
+
+
+
+
+export const useMessageStore = create<MessageStoreState>((set) => ({
+  messages: [],
+  addMessage: (message) => set((state) => {
+    if (!message.to) {
+      console.error("Message is missing 'to' field:", message);
+      return state;
+    }
+    return { messages: [...state.messages, message] };
+  }),
+  setMessages: (messages) => set({ messages }),
+}));
 
 export const UsersStore = create<User>()(
   persist(
     (set) => ({
       user: undefined,
-      users:[],
+      users: [],
       setUserId: (userId) => {
-        set(() => {
-          return { user: userId };
+        set((state) => {
+          return { ...state, user: userId };
         });
       },
-      setUsers:(users)=>{
-        set(()=>{
-          return {};
+      setUsers: (users) => {
+        set((state) => {
+          return { ...state, users: users };
         })
       },
-      fetchUsers: async () => {
-        try {
-          const response = await axios.get("https://api.ktkv.dev/users");
-          set({ users: response.data });
-        } catch (error) {
-          console.error("Error fetching users:", error);
-        }
-      },
-    //   removeLikedMovies: (movie) => {
-    //     set((state) => {
-    //       return {
-    //         ...state,
-    //         likedMovies: [...state.likedMovies.filter((aId) => aId.imdbID !== movie.imdbID)],
-    //       };
-    //     });
-    //   },
+      //   removeLikedMovies: (movie) => {
+      //     set((state) => {
+      //       return {
+      //         ...state,
+      //         likedMovies: [...state.likedMovies.filter((aId) => aId.imdbID !== movie.imdbID)],
+      //       };
+      //     });
+      //   },
     }),
     {
-      name: "Users",
+      name: "users",
     }
-    
+
   )
-  
+
 );
-socket.on('users', (users: User[]) => {
-  UsersStore.getState().setUsers(users);
-});
