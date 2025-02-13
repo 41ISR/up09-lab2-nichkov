@@ -1,13 +1,13 @@
-import React from "react";
 interface Props{
-    key: string | undefined
-    user: string | undefined
+    key: number | undefined
+    message: string | undefined
+    //message: string | undefined
 }
-const SidebarChat=({key, user}:Props)=>{
+const SidebarChat=({key, message}:Props)=>{
     
     return(
         <div className="chat_cont">
-            <div className="chat_content" key={key}>{user}</div>
+            <div className="chat_content" key={key}>{message}</div>
         </div>
     )
 }

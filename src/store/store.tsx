@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface IAppUser {
+export interface IAppUser {
   id: string;
   socketId?: string;
 }
