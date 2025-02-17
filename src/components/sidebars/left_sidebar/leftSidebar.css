@@ -58,7 +58,8 @@
 }
 
 .chat_list.open, .contact_list.open {
-    max-height: 200px;
+    max-height: 400px;
+    overflow-y:visible;
 }
 .left_sidebar_chats, .left_sidebar_contacts {
     position: relative;

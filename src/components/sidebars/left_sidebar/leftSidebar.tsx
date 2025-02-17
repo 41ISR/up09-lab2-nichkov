@@ -21,9 +21,9 @@ const LeftSidebar = ({ onSelectUser }: { onSelectUser: (id: string) => void }) =
         setActiveChats([...new Set(messages.map((msg) => msg.from))])
     }, [messages])
 
-    useEffect(() => {
-        console.log(users);
-    }, [users])
+    // useEffect(() => {
+    //     console.log(users);
+    // }, [users])
 
     const toggleChats = () => {
         setChatsOpen(!isChatsOpen);
@@ -41,7 +41,7 @@ const LeftSidebar = ({ onSelectUser }: { onSelectUser: (id: string) => void }) =
                     {activeChats.map((msg, index, user) => (
                         <SidebarChat
                             key={index} 
-                            //onClick={() => onSelectUser(msg)}
+                            onClick={() => onSelectUser(msg)}
                             message={msg}
                         />
                     ))}
@@ -54,7 +54,7 @@ const LeftSidebar = ({ onSelectUser }: { onSelectUser: (id: string) => void }) =
                         <SidebarUser
                             key={user.id} 
                             {...user}
-                            //onClick={() => onSelectUser(user.id)}
+                            onClick={() => onSelectUser(user.id)}
                         />
                     ))}
 

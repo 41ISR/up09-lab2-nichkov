@@ -25,9 +25,7 @@ const Api = {
     return res.data;
   },
   messages: async (id: string) => {
-    const res = await Instance.get<messageRDO[]>("/messages", {
-      params: {id:id},
-    });
+    const res = await Instance.get<messageRDO[]>(`/messages/${id}`, {});
     console.log(res.data);
     return res.data;
   },

@@ -1,10 +1,11 @@
-import { IAppUser } from "../../../store/store";
-
-const SidebarUser=({id}: IAppUser)=>{
-    
+interface Props{
+    id:string
+    onClick:()=>void
+}
+const SidebarUser=({id, onClick}: Props)=>{
     return(
         <div className="chat_cont">
-            <div className="chat_content">{id}</div>
+            <div onClick={onClick} className="chat_content">{id}</div>
         </div>
     )
 }

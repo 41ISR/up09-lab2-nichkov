@@ -1,13 +1,13 @@
 interface Props{
-    key: number | undefined
     message: string | undefined
+    onClick:()=>void
     //message: string | undefined
 }
-const SidebarChat=({key, message}:Props)=>{
+const SidebarChat=({message,onClick}:Props)=>{
     
     return(
         <div className="chat_cont">
-            <div className="chat_content" key={key}>{message}</div>
+            <div onClick={onClick} className="chat_content" >{message}</div>
         </div>
     )
 }
