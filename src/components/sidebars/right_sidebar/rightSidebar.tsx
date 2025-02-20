@@ -4,7 +4,6 @@ import SidebarInput from "./sidebarInput";
 import SidebarText from "./sidebarUserText";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-import Api from "../../../api/api";
 interface Messages{
     recipientId:string
 }
@@ -12,7 +11,6 @@ const socket = io("https://api.ktkv.dev");
 const RightSidebar =({recipientId}:Messages)=>{
     const { messages, addMessage, setMessages } = useMessageStore();
     const { user, setUsers } = UsersStore()
-    const [selectedUser, setSelectedUser] = useState<string | null>(null);
     const [message, setMessage] = useState<string>("");
 
     useEffect(() => {
@@ -50,6 +48,7 @@ const RightSidebar =({recipientId}:Messages)=>{
     return(
         <div className="right_sidebar">
             <div className="messages">
+                <div className="current_user">{recipientId ? `Чат с ${recipientId}` : "Нет активных чатов"}</div>
                 {filteredMessages.map((msg, index) => (
                     <SidebarText key={index} from={msg.from} timestamp={new Date(msg.timestamp).toLocaleTimeString()} message={msg.message}  currentUser={user}/>
                 ))}

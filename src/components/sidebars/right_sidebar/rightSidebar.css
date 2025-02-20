@@ -3,13 +3,35 @@
     float:left;
 }
 .messages{
-    height:80vh;
+    height: 80vh;
     max-height: 80vh;
-    overflow-y:scroll;
-    scrollbar-color:transparent initial;
+    overflow-y:auto;
+}
+.messages::-webkit-scrollbar {
+    width:10px;
+    border-radius: 20px;
 }
 .messages::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: black;
+    border-top-right-radius: 20px;
+}
+.messages::-webkit-scrollbar-thumb {
+    background-color: #3d3d3d;
+    border-radius: 20px;
+    border:3px solid black;
+    box-sizing: border-box;
+}
+.current_user{
+    position: sticky;
+    top: 0;          
+    z-index: 10;     
+    height:7vh;
+    color:white;
+    width:100%;
+    text-align: center;
+    line-height: 7vh;
+    font-size:25px;
+    background-color: black;
 }
 .sidebar_text{
     width:90%;
@@ -51,26 +73,30 @@
     font-size:20px;
     line-height:9vh;
 }
-.send_message_submit{
-    all:unset;
-    float:left;
-    border-left:4px solid #3d3d3d;
-    height:10vh;
-    width:20%;
+.send_message_submit {
+    all: unset;
+    float: left;
+    border-left: 4px solid #3d3d3d;
+    height: 10vh;
+    width: 20%;
     box-sizing: border-box;
     background-color: none;
     text-align: center;
     cursor: pointer;
     transition: all .3s;
-    border-bottom-right-radius:13px;
+    border-bottom-right-radius: 13px;
 }
-.send_message_submit:hover{
-    background-color:#3d3d3d;
+
+.send_message_submit img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s;
 }
-.send_message_submit img{
-    width:40px;
-    height:40px;
+
+.send_message_submit:hover img {
+    transform: scale(1.4);
 }
+
 .from{
     font-size:25px;
 }

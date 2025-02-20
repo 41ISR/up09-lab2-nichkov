@@ -1,13 +1,16 @@
 interface Props{
     message: string | undefined
     onClick:()=>void
-    //message: string | undefined
+    socketId: string | undefined;
 }
-const SidebarChat=({message,onClick}:Props)=>{
+const SidebarChat=({message,onClick, socketId}:Props)=>{
     
     return(
         <div className="chat_cont">
-            <div onClick={onClick} className="chat_content" >{message}</div>
+            <div onClick={onClick} className="chat_content" >
+                <div className={socketId ? "online" : "offline"}></div>
+                {message}
+            </div>
         </div>
     )
 }

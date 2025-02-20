@@ -18,7 +18,7 @@ const LeftSidebar = ({ onSelectUser }: { onSelectUser: (id: string) => void }) =
     }, [])
 
     useEffect(() => {
-        setActiveChats([...new Set(messages.map((msg) => msg.from))])
+        setActiveChats([...new Set(messages.map((msg) => msg.from && msg.to))])
     }, [messages])
 
     // useEffect(() => {
@@ -38,26 +38,32 @@ const LeftSidebar = ({ onSelectUser }: { onSelectUser: (id: string) => void }) =
             <div className="left_sidebar_chats">
                 <p onClick={toggleChats}>Чаты</p>
                 <div className={`chat_list ${isChatsOpen ? 'open' : ''}`}>
-                    {activeChats.map((msg, index, user) => (
-                        <SidebarChat
-                            key={index} 
-                            onClick={() => onSelectUser(msg)}
-                            message={msg}
-                        />
-                    ))}
+                    {activeChats.map((msg, index) => {
+                        const user = users.find(user => user.id === msg);
+                        return (
+                            <SidebarChat
+                                key={index}
+                                onClick={() => onSelectUser(msg)}
+                                message={msg}
+                                socketId={user?.socketId}
+                            />
+                        );
+                    })}
                 </div>
             </div>
             <div className="left_sidebar_contacts">
                 <p onClick={toggleContacts}>Контакты</p>
                 <div className={`contact_list ${isContactsOpen ? 'open' : ''}`}>
                     {users.map((user) => (
-                        <SidebarUser
-                            key={user.id} 
-                            {...user}
-                            onClick={() => onSelectUser(user.id)}
-                        />
+                        !activeChats.includes(user.id) && (
+                            <SidebarUser
+                                key={user.id}
+                                socketId={user.socketId}
+                                {...user}
+                                onClick={() => onSelectUser(user.id)}
+                            />
+                        )
                     ))}
-
                 </div>
             </div>
         </div>

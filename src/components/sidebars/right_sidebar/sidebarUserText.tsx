@@ -2,7 +2,7 @@ interface MessageData{
     from: string;
     message: string;
     timestamp: string;
-    currentUser:string;
+    currentUser:string | undefined;
 }
 const SidebarText =({from, message, timestamp, currentUser}:MessageData)=>{
     const isCurrentUserRecipient = currentUser === from;

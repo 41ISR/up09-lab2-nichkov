@@ -41,6 +41,7 @@
     transition: all .3s;
     cursor: pointer;
     box-sizing: border-box;
+    position: relative;
 }
 .chat_cont:hover{
     margin-left:5px;
@@ -57,9 +58,10 @@
     margin-bottom:20px;
 }
 
+
 .chat_list.open, .contact_list.open {
     max-height: 400px;
-    overflow-y:visible;
+    overflow-y:auto;
 }
 .left_sidebar_chats, .left_sidebar_contacts {
     position: relative;
@@ -69,7 +71,58 @@
     overflow: hidden;
     transition: all 0.3s ease-out;
 }
-
+.contact_list.open::-webkit-scrollbar {
+    width:10px;
+    border-radius: 20px;
+}
+.contact_list.open::-webkit-scrollbar-track {
+    background-color: black;
+    border-top-right-radius: 20px;
+}
+.contact_list.open::-webkit-scrollbar-thumb {
+    background-color: #3d3d3d;
+    border-radius: 20px;
+    border:3px solid black;
+    box-sizing: border-box;
+}
+.chat_list.open::-webkit-scrollbar {
+    width:10px;
+    border-radius: 20px;
+}
+.chat_list.open::-webkit-scrollbar-track {
+    background-color: black;
+    border-top-right-radius: 20px;
+}
+.chat_list.open::-webkit-scrollbar-thumb {
+    background-color: #3d3d3d;
+    border-radius: 20px;
+    border:3px solid black;
+    box-sizing: border-box;
+}
 .open {
     height:fit-content;
+}
+.offline{
+    width:20px;
+    height:20px;
+    position: absolute;
+    border:3px solid black;
+    background-color: #212121;
+    border-radius: 100%;
+    box-sizing: border-box;
+    right:10px;
+    bottom:10px;
+    transition: all .3s;
+}
+.online{
+    width:20px;
+    height:20px;
+    position: absolute;
+    border:3px solid #00e08e;
+    background-color: #00e08e;
+    border-radius: 100%;
+    box-sizing: border-box;
+    right:10px;
+    bottom:10px;
+    transition: all .3s;
 }
